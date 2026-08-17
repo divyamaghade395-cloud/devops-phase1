@@ -11,34 +11,25 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'echo "Running application checks..."'
+                sh 'echo "Jenkins pipeline started successfully"'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 sh '''
-                    cd app
-                    docker build -t divyamaghade/devops-phase1-app:1.0 .
+                    docker build \
+                      -t divyamaghade/devops-phase1-app:1.0 \
+                      ./app
                 '''
             }
         }
 
-        stage('Push to Docker Hub') {
+        stage('Verify Docker Image') {
             steps {
-                echo 'Docker Hub push will be configured next'
-            }
-        }
-
-        stage('Deploy using Ansible') {
-            steps {
-                echo 'Ansible deployment will be configured next'
-            }
-        }
-
-        stage('Health Check') {
-            steps {
-                echo 'Health check will be configured next'
+                sh '''
+                    docker images | grep devops-phase1-app
+                '''
             }
         }
     }
