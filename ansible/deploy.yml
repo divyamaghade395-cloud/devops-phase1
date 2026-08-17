@@ -1,0 +1,30 @@
+---
+- name: Deploy Docker application
+  hosts: webservers
+  become: true
+
+  vars:
+    docker_image: "divyamaghade/devops-phase1-app:1.0"
+    container_name: "devops-phase1-app"
+    app_port: 5000
+
+  tasks:
+
+    - name: Pull Docker image
+      community.docker.docker_image:
+        name: "{{ docker_image }}"
+        source: pull
+
+    - name: Stop existing container
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        state: absent
+
+    - name: Start application container
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        image: "{{ docker_image }}"
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "{{ app_port }}:5000"

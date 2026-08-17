@@ -1,0 +1,15 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.pem
+*.key
+.env
+__pycache__/
+EOFcat > .gitignore <<'EOF'
+.terraform/
+*.tfstate
+*.tfstate.*
+*.pem
+*.key
+.env
+__pycache__/
