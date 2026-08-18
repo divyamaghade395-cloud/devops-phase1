@@ -1,2 +1,2 @@
 [webservers]
-ec2 ansible_host=13.127.163.14 ansible_user=ubuntu ansible_ssh_private_key_file=/home/divya/.ssh/terraform-key.pem
+ec2 ansible_host=13.127.163.14 ansible_user=ubuntu
