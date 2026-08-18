@@ -60,6 +60,12 @@ pipeline {
         }
 
         stage('Deploy with Ansible') {
+           
+    environment {
+        ANSIBLE_HOST_KEY_CHECKING = 'False'
+    }
+
+    steps {
             steps {
                 withCredentials([
                     sshUserPrivateKey(
